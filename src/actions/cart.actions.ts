@@ -9,6 +9,14 @@ export async function getUserCart() {
     try {
 
         const token = await getUserToken()
+        if (!token) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
 
         const resp = await fetch(`https://ecommerce.routemisr.com/api/v2/cart`, {
             method: "GET",
@@ -45,7 +53,14 @@ export async function addToCart(productId: string) {
     try {
 
         const token = await getUserToken()
-
+        if (!token) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
         const resp = await fetch(`https://ecommerce.routemisr.com/api/v2/cart`, {
             method: "POST",
             headers: {
@@ -82,7 +97,14 @@ export async function updateProductQty(productId: string, count: number) {
     try {
 
         const token = await getUserToken()
-
+        if (!token) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
         const resp = await fetch(`https://ecommerce.routemisr.com/api/v2/cart/${productId}`, {
             method: "PUT",
             headers: {
@@ -124,7 +146,14 @@ export async function removeProduct(productId: string) {
     try {
 
         const token = await getUserToken()
-
+        if (!token) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
         const resp = await fetch(`https://ecommerce.routemisr.com/api/v2/cart/${productId}`, {
             method: "DELETE",
             headers: {
@@ -165,7 +194,14 @@ export async function clearUserCart() {
     try {
 
         const token = await getUserToken()
-
+        if (!token) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
         const resp = await fetch(`https://ecommerce.routemisr.com/api/v2/cart`, {
             method: "DELETE",
             headers: {

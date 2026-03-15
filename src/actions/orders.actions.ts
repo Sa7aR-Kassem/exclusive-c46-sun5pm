@@ -12,7 +12,14 @@ export async function getUserOrders() {
     try {
 
         const userId = await getUserId()
-
+        if (!userId) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
         const resp = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/user/${userId}`, {
             method: "GET",
             headers: {
@@ -49,7 +56,14 @@ export async function createOrder(cartId: string, formValues: AddressPayloadType
             : `api/v1/orders/checkout-session/${cartId}?url=${process.env.NEXTAUTH_URL}`
 
         const token = await getUserToken()
-
+        if (!token) {
+            return {
+                error: {
+                    message: "Please login first"
+                },
+                status: false
+            }
+        }
         const resp = await fetch(`https://ecommerce.routemisr.com/${endpoint}`, {
             method: "POST",
             headers: {
